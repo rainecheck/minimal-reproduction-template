@@ -26,4 +26,4 @@ Renovate should find the newer Temurin release with or without the lockfile.
 
 ## Link to the Renovate issue or Discussion
 
-Not yet filed.
+[#48396](https://github.com/renovatebot/renovate/discussions/48396)
