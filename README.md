@@ -1,17 +1,29 @@
-# minimal-reproduction-template
+# Renovate skips a locked Temurin pin
 
-First, read the [Renovate minimal reproduction instructions](https://github.com/renovatebot/renovate/blob/main/docs/development/minimal-reproductions.md).
+This example reproduces a lookup failure in Renovate's built-in `mise` manager.
 
-Then replace the current `h1` with the Renovate Issue/Discussion number.
+## Reproduce the lookup failure
+
+Run this command from the repository root with Docker:
+
+```sh
+docker run --rm --network none -v "$PWD:/repro:ro" \
+  --entrypoint /usr/local/renovate/node renovate/renovate:44.263.4 \
+  /repro/reproduce.mjs
+```
+
+The script uses the same [manifest](./mise.toml) and two fixed `java-version` releases for both
+lookups. Only one lookup reads [the lockfile](./mise.lock). It does not install Java or run mise.
 
 ## Current behavior
 
-Explain the current behavior here.
+With the lockfile, Renovate reports `skipReason: "invalid-version"` and finds no update.
+Without the lockfile, it finds `21.0.13+9.0.LTS`.
 
 ## Expected behavior
 
-Explain the expected behavior here.
+Renovate should find the newer Temurin release with or without the lockfile.
 
 ## Link to the Renovate issue or Discussion
 
-Put your link to the Renovate issue or Discussion here.
+Not yet filed.
